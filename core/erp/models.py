@@ -11,6 +11,7 @@ class Employee(models.Model):
     age = models.PositiveIntegerField(default=0)
     salary = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     state = models.BooleanField(default=True)
+    #gender = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
     cvitae = models.FileField(upload_to='cvitae/%Y/%m/%d', null=True, blank=True)
 
