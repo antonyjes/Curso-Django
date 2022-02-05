@@ -2,6 +2,18 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
+class Type(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Tipo"
+        verbose_name_plural = "Tipos"
+        db_table = 'tipo'
+        ordering = ['id']
+
 class Employee(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
     dni = models.CharField(max_length=10, verbose_name='Dni', unique=True)
@@ -14,6 +26,7 @@ class Employee(models.Model):
     #gender = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
     cvitae = models.FileField(upload_to='cvitae/%Y/%m/%d', null=True, blank=True)
+    type = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.names
