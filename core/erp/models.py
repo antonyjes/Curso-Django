@@ -38,7 +38,7 @@ class Employee(models.Model):
     #gender = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/%Y/%m/%d', null=True, blank=True)
     cvitae = models.FileField(upload_to='cvitae/%Y/%m/%d', null=True, blank=True)
-    type = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True)
+    type = models.ForeignKey(Type, on_delete=models.SET_NULL, null=True)  #SET_NULL si SET_NULL() no
 
     def __str__(self):
         return self.names
