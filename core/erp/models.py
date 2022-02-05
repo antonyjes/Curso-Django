@@ -14,10 +14,22 @@ class Type(models.Model):
         db_table = 'tipo'
         ordering = ['id']
 
+class Category(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Nombre')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+        db_table = 'categoria'
+        ordering = ['id']
+
 class Employee(models.Model):
     names = models.CharField(max_length=150, verbose_name='Nombres')
     dni = models.CharField(max_length=10, verbose_name='Dni', unique=True)
-    date_joined = models.DateField(default=datetime.now, verbose_name="Fecha de registro")
+    date_joined = models.DateField(default=datetime.now, verbose_name='Fecha de registro')
     date_creation = models.DateTimeField(auto_now=True)
     date_updated = models.DateTimeField(auto_now_add=True)
     age = models.PositiveIntegerField(default=0)
@@ -35,4 +47,17 @@ class Employee(models.Model):
         verbose_name = 'Empleado'
         verbose_name_plural = 'Empleados'
         db_table = 'empleado'
+        ordering = ['id']
+
+class EmployeeCat(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.employee
+
+    class Meta:
+        verbose_name = 'EmpleadoCateg'
+        verbose_name_plural = 'EmpleadosCategs'
+        db_table = 'empleadocat'
         ordering = ['id']
